@@ -20,7 +20,7 @@ const FooterNav = ({ active }: FooterNavProps) => {
       <TouchableOpacity onPress={() => router.push('/cart_screen')}>
         <Feather name="shopping-bag" size={24} color={iconColor('cart')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/wishlist')}>
+      <TouchableOpacity onPress={() => router.push('/favorites_screen')}>
         <Feather name="heart" size={24} color={iconColor('heart')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.push('/accountInfo')}>
