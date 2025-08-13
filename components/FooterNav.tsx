@@ -14,7 +14,7 @@ const FooterNav = ({ active }: FooterNavProps) => {
 
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 12, borderTopWidth: 1, borderColor: '#eee' }}>
-      <TouchableOpacity onPress={() => router.push('/')}>
+      <TouchableOpacity onPress={() => router.push('/mainpage')}>
         <Feather name="home" size={24} color={iconColor('home')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.push('/cart_screen')}>

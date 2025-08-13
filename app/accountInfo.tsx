@@ -30,7 +30,7 @@ export default function AccountInfoScreen() {
     }
 
     Alert.alert("Changes Saved", "Your information has been updated.");
-    navigation.navigate('index');    
+    navigation.navigate('mainpage');    
 };
 
     
@@ -42,7 +42,7 @@ export default function AccountInfoScreen() {
     >
         {/* Header */}
         <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("index")}>
+            <TouchableOpacity onPress={() => navigation.navigate("mainpage")}>
                 <Ionicons name="arrow-back" size={24} color="black" />
             </TouchableOpacity>
             <Text style={styles.headerText}>Account Information</Text>

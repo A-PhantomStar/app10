@@ -1,252 +1,177 @@
-import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import FooterNav from '../components/FooterNav';
+// App.tsx
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, SafeAreaView } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
 
-const initialPosts = [
-  {
-    id: 1,
-    name: 'Edith Delgado',
-    isVerified: true,
-    text: 'Visit my store and pick whatever you want 😍🛍️',
-    image: 'https://cdn.britannica.com/35/222035-050-C68AD682/makeup-cosmetics.jpg',
-    likes: 43,
-    comments: ['Love it!', 'Where is your store?', '😍😍😍', 'Nice!'],
-    avatarSeed: 'edith1',
-  },
-  {
-    id: 2,
-    name: 'Edith Delgado',
-    isVerified: true,
-    text: 'Check out this rug! Jimbo approved',
-    image: 'https://ae01.alicdn.com/kf/Se25158f7007845b599b74d6c9186ffa09/Cool-Poker-Playing-Cards-Pattern-Doormat-Anti-Slip-Entrance-Bath-Kitchen-Door-Floor-Mat-Gambling-Card.jpg',
-    productTitle: 'Balatro Rug',
-    price: '$24.00',
-    discount: '25%',
-    likes: 68,
-    comments: ['On sale?', 'Great product!', 'I want this!', 'How many colors?'],
-    avatarSeed: 'edith2',
-  },
-];
-
-export default function FeedScreen() {
-  const [posts, setPosts] = useState(initialPosts);
-  const [activeComments, setActiveComments] = useState<null | number>(null);
-  const [newComment, setNewComment] = useState('');
-  const router = useRouter();
-
-  // Animaciones
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideAnim = useRef(new Animated.Value(300)).current;
-
-  useEffect(() => {
-    if (activeComments !== null) {
-      Animated.parallel([
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-        Animated.timing(slideAnim, {
-          toValue: 0,
-          duration: 300,
-          easing: Easing.out(Easing.ease),
-          useNativeDriver: true,
-        }),
-      ]).start();
-    } else {
-      Animated.parallel([
-        Animated.timing(fadeAnim, {
-          toValue: 0,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-        Animated.timing(slideAnim, {
-          toValue: 300,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-      ]).start();
-    }
-  }, [activeComments]);
-
-  const toggleLike = (postId: number) => {
-    setPosts(prev => prev.map(p => {
-      if (p.id === postId) {
-        const liked = !p.liked;
-        const likeCount = liked ? p.likes + 1 : p.likes - 1;
-        return { ...p, liked, likes: likeCount };
-      }
-      return p;
-    }));
-  };
-
-  const addComment = () => {
-    if (!newComment.trim()) return;
-    setPosts(prev => prev.map(p => {
-      if (p.id === activeComments) {
-        return { ...p, comments: [...p.comments, newComment] };
-      }
-      return p;
-    }));
-    setNewComment('');
-  };
+export default function App() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <ScrollView>
-        {/* Header */}
-        <View style={{ padding: 16 }}>
-          <Text style={{ fontSize: 16 }}>Hi, <Text style={{ fontWeight: 'bold' }}>Sophia 🦄</Text></Text>
-          <Text style={{ fontSize: 12, color: 'gray' }}>Anything to share with the community?</Text>
-          <View style={{ flexDirection: 'row', marginTop: 8, gap: 8 }}>
-            {['Photo', 'Video', 'Products'].map((label, idx) => (
-              <TouchableOpacity
-                key={idx}
-                onPress={() => router.push('/create-post')}
-                style={{ flex: 1, padding: 8, backgroundColor: '#f1f1f1', borderRadius: 8 }}
-              >
-                <Text style={{ textAlign: 'center' }}>{label}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
+    <SafeAreaView style={styles.container}>
+      {/* Logo */}
+      <Image source={require("../assets/images/logo.png")} style={styles.logo} />
+      <Text style={styles.brand}>blossom</Text>
+      <Text style={styles.subtitle}>Beauty brand</Text>
 
-        {/* Posts */}
-        {posts.map((post) => (
-          <View key={post.id} style={{ margin: 16, backgroundColor: 'white', borderRadius: 12, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 5, elevation: 3 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 12 }}>
-              <Image
-                source={{ uri: `https://api.dicebear.com/7.x/avataaars/png?seed=${post.avatarSeed}` }}
-                style={{ width: 40, height: 40, borderRadius: 20, marginRight: 8 }}
-              />
-              <Text style={{ fontWeight: 'bold', flex: 1 }}>
-                {post.name} {post.isVerified && <Ionicons name="checkmark-circle" size={14} color="#4f93ff" />}
-              </Text>
-              <Feather name="more-horizontal" size={18} color="gray" />
-            </View>
-            <Text style={{ paddingHorizontal: 12, paddingBottom: 8 }}>{post.text}</Text>
-            <Image source={{ uri: post.image }} style={{ width: '100%', height: 300 }} />
+      {/* Texto superior */}
+      <Text style={styles.welcomeText}>Please login to use the app</Text>
 
-            {post.productTitle && (
-              <View style={{ padding: 12, flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
-                <View style={{ backgroundColor: '#FF4D4D', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 4, marginRight: 6 }}>
-                  <Text style={{ color: 'white', fontSize: 12 }}>{post.discount}</Text>
-                </View>
-                <Text style={{ fontWeight: 'bold', flex: 1 }}>{post.productTitle}</Text>
-                <Text style={{ fontWeight: 'bold', color: '#333' }}>{post.price}</Text>
-              </View>
-            )}
+      {/* Campo email */}
+      <TextInput
+        placeholder="Email or user name"
+        style={styles.input}
+        value={username}
+        onChangeText={setUsername}
+      />
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 12, gap: 16 }}>
-              <TouchableOpacity onPress={() => toggleLike(post.id)}>
-                <AntDesign name={post.liked ? 'heart' : 'hearto'} size={18} color={post.liked ? 'red' : 'gray'} />
-              </TouchableOpacity>
-              <Text>{post.likes}</Text>
-              <TouchableOpacity onPress={() => setActiveComments(post.id)}>
-                <Feather name="message-circle" size={18} color="gray" />
-              </TouchableOpacity>
-              <Text>{post.comments.length}</Text>
-            </View>
-          </View>
-        ))}
-      </ScrollView>
+      {/* Campo password */}
+      <View style={styles.passwordContainer}>
+        <TextInput
+          placeholder="Type password"
+          secureTextEntry={!showPassword}
+          style={styles.passwordInput}
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <Ionicons name={showPassword ? "eye" : "eye-off"} size={20} color="#999" />
+        </TouchableOpacity>
+      </View>
 
-{/* Comments Modal con animación */}
-{activeComments !== null && (
-  <Animated.View
-    style={{
-      position: 'absolute',
-      top: 0, left: 0, right: 0, bottom: 0,
-      // Asegura que esté encima de todo:
-      zIndex: 9999,
-      elevation: 9999,
-      backgroundColor: fadeAnim.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.4)']
-      }),
-    }}
-  >
-    <TouchableOpacity
-      activeOpacity={1}
-      style={{ flex: 1, justifyContent: 'flex-end' }}
-      onPress={() => setActiveComments(null)}
-    >
-      <Animated.View
-        style={{
-          transform: [{ translateY: slideAnim }],
-          height: '75%',
-          backgroundColor: 'white',
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          paddingTop: 8,
-          // También dar zIndex/elevation al panel en sí por si acaso:
-          zIndex: 10000,
-          elevation: 10000,
-        }}
-      >
-        {/* Barra indicadora */}
-        <View style={{ alignItems: 'center', paddingVertical: 8 }}>
-          <View style={{ width: 40, height: 4, backgroundColor: '#ccc', borderRadius: 2 }} />
-        </View>
+      {/* Forgot password */}
+      <TouchableOpacity onPress={() => navigation.navigate("forgot-pass")}>
+        <Text style={styles.forgotText}>Forgot password?</Text>
+      </TouchableOpacity>
 
-        {/* Header */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 16, paddingBottom: 8 }}>
-          <TouchableOpacity style={{ position: 'absolute', left: 16, flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ fontSize: 14, marginRight: 4, color: '#555' }}>Newest</Text>
-            <Feather name="chevron-down" size={16} color="gray" />
-          </TouchableOpacity>
-          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Comments</Text>
-        </View>
+      {/* Botón Sign In */}
+      <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate("mainpage")}>
+        <Text style={styles.signInText}>Sign In</Text>
+      </TouchableOpacity>
 
-        {/* Lista comentarios */}
-        <ScrollView style={{ paddingHorizontal: 16 }}>
-          {posts.find(p => p.id === activeComments)?.comments.map((c, index) => {
-            const userNames = ["Gilbert Bryan", "Hilda Kennedy", "Jeffrey Curry", "Frances Colon"];
-            const name = userNames[index % userNames.length];
-            return (
-              <View key={index} style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: 20 }}>
-                <Image
-                  source={{ uri: `https://api.dicebear.com/7.x/avataaars/png?seed=${name.replace(/\s+/g, '')}` }}
-                  style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12 }}
-                />
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Text style={{ fontWeight: 'bold' }}>{name}</Text>
-                    <TouchableOpacity><Text style={{ color: '#f44', fontSize: 12 }}>Reply</Text></TouchableOpacity>
-                  </View>
-                  <Text style={{ fontSize: 12, color: 'gray', marginBottom: 4 }}>{index + 1} days ago</Text>
-                  <Text style={{ fontSize: 14, color: '#333' }}>{c}</Text>
-                </View>
-              </View>
-            );
-          })}
-        </ScrollView>
+      {/* Or connect with */}
+      <Text style={styles.orText}>Or connect with</Text>
+      <View style={styles.socialContainer}>
+        <TouchableOpacity style={styles.socialButton}>
+          <Image source={require("../assets/images/apple.png")} style={styles.socialIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.socialButton}>
+          <Image source={require("../assets/images/facebook.png")} style={styles.socialIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.socialButton}>
+          <Image source={require("../assets/images/google.png")} style={styles.socialIcon} />
+        </TouchableOpacity>
+      </View>
 
-        {/* Input */}
-        <View style={{ flexDirection: 'row', padding: 16, borderTopWidth: 1, borderColor: '#eee' }}>
-          <TextInput
-            value={newComment}
-            onChangeText={setNewComment}
-            placeholder="Add a comment..."
-            style={{ flex: 1, borderWidth: 1, borderColor: '#ccc', borderRadius: 20, paddingHorizontal: 12 }}
-          />
-          <TouchableOpacity onPress={addComment} style={{ marginLeft: 8, justifyContent: 'center' }}>
-            <Text style={{ color: '#f44', fontWeight: 'bold' }}>Send</Text>
-          </TouchableOpacity>
-        </View>
-      </Animated.View>
-    </TouchableOpacity>
-  </Animated.View>
-)}
-
-{/* FooterNav: envuelve para desactivar interacciones cuando el modal está abierto */}
-<View pointerEvents={activeComments !== null ? 'none' : 'auto'}>
-  <FooterNav active="home" />
-</View>
-
+      {/* Sign Up */}
+      <Text style={styles.signupText}onPress={() => navigation.navigate("signup")}>
+        Don’t have an account? <Text style={styles.signupLink}>Sign Up</Text>
+      </Text>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#fff",
+    padding: 20,
+  },
+  logo: {
+    width: 60,
+    height: 60,
+    marginTop: 40,
+    borderRadius: 12,
+  },
+  brand: {
+    fontSize: 28,
+    fontWeight: "400",
+    marginTop: 10,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: "#888",
+    marginBottom: 30,
+  },
+  welcomeText: {
+    fontSize: 16,
+    color: "#333",
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  input: {
+    width: "100%",
+    height: 50,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+    backgroundColor: "#fff",
+  },
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    height: 50,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    backgroundColor: "#fff",
+    marginBottom: 10,
+  },
+  passwordInput: {
+    flex: 1,
+  },
+  forgotText: {
+    alignSelf: "flex-end",
+    color: "#888",
+    fontSize: 14,
+    marginBottom: 20,
+  },
+  signInButton: {
+    width: "100%",
+    backgroundColor: "#f56600",
+    paddingVertical: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 25,
+  },
+  signInText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  orText: {
+    color: "#888",
+    marginBottom: 10,
+  },
+  socialContainer: {
+    flexDirection: "row",
+    gap: 20,
+    marginBottom: 25,
+  },
+  socialButton: {
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 50,
+    elevation: 2,
+  },
+  socialIcon: {
+    width: 30,
+    height: 30,
+    resizeMode: "contain",
+  },
+  signupText: {
+    color: "#555",
+  },
+  signupLink: {
+    color: "#f56600",
+    fontWeight: "bold",
+  },
+});

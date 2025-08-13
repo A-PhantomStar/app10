@@ -12,14 +12,14 @@ export default function Index() {
 
   const completeButton = () => {
     Alert.alert("Purchase Successful", "Your order has been placed!", [{ text: "OK" }]);
-    navigation.navigate('index'); 
+    navigation.navigate('mainpage'); 
   };
 
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate("index")}>
+        <TouchableOpacity onPress={() => navigation.navigate("mainpage")}>
            <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerText}>Confirm Bill</Text>

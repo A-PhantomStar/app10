@@ -98,7 +98,7 @@ const CartScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate("index")}>
+      <TouchableOpacity onPress={() => navigation.navigate("mainpage")}>
             <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
       <Text style={styles.header}>Shopping Cart</Text>
