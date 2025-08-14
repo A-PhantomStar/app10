@@ -17,13 +17,13 @@ const FooterNav = ({ active }: FooterNavProps) => {
       <TouchableOpacity onPress={() => router.push('/mainpage')}>
         <Feather name="home" size={24} color={iconColor('home')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/cart_screen')}>
+      <TouchableOpacity onPress={() => router.push('/userstuff')}>
         <Feather name="shopping-bag" size={24} color={iconColor('cart')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.push('/favorites_screen')}>
         <Feather name="heart" size={24} color={iconColor('heart')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/accountInfo')}>
+      <TouchableOpacity onPress={() => router.push('/profile')}>
         <Feather name="user" size={24} color={iconColor('user')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.push('/search')}>

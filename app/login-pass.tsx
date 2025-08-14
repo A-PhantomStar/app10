@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberedUser, setRememberedUser] = useState("Sophia"); // cambia a "" para la primera versión
   const [showPassword, setShowPassword] = useState(false);
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -50,12 +52,12 @@ export default function App() {
       </View>
 
       {/* Forgot password */}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("forgot-pass")}>
         <Text style={styles.forgotText}>Forgot password?</Text>
       </TouchableOpacity>
 
       {/* Botón Sign In */}
-      <TouchableOpacity style={styles.signInButton}>
+      <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate("mainpage")}>
         <Text style={styles.signInText}>Sign In</Text>
       </TouchableOpacity>
 
@@ -74,7 +76,7 @@ export default function App() {
       </View>
 
       {/* Sign Up */}
-      <Text style={styles.signupText}>
+      <Text style={styles.signupText} onPress={() => navigation.navigate("signup")}>
         Don’t have an account? <Text style={styles.signupLink}>Sign Up</Text>
       </Text>
     </SafeAreaView>

@@ -59,7 +59,7 @@ export default function ForgotPasswordScreen() {
       </TouchableOpacity>
 
       {/* Botón Next */}
-      <TouchableOpacity style={styles.nextButton}>
+      <TouchableOpacity onPress={() => navigation.navigate("code-email")} style={styles.nextButton}>
         <Text style={styles.nextButtonText}>Next</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>

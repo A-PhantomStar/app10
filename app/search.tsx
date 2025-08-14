@@ -1,6 +1,5 @@
 import React from 'react';
 import FooterNav from '../components/FooterNav';
-
 import {
   View,
   Text,
@@ -10,6 +9,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const searchHistory = ['Purple Lips', '3CE', 'Spring Collection 2020'];
 const popularTags = ['Herbivore', 'Cinema Secrets', 'Hair', 'Dyson', 'Eyelash Tool', 'Blender'];
@@ -34,6 +34,8 @@ const suggestions = [
 ];
 
 export default function SearchScreen() {
+  const navigation = useNavigation();
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Search</Text>
@@ -72,7 +74,11 @@ export default function SearchScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Suggestion for you</Text>
         {suggestions.map((item, idx) => (
-          <View key={idx} style={styles.card}>
+          <TouchableOpacity
+            key={idx}
+            style={styles.card}
+            onPress={() => navigation.navigate('product-view')}
+          >
             <Image source={{ uri: item.image }} style={styles.productImage} />
             <View style={{ flex: 1 }}>
               <Text style={styles.brand}>{item.brand}</Text>
@@ -80,7 +86,7 @@ export default function SearchScreen() {
               <Text style={styles.price}>{item.price}</Text>
               <Text style={styles.stats}>❤️ {item.likes}   ⭐ {item.rating}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
       <FooterNav active="search"/>

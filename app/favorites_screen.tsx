@@ -19,6 +19,7 @@ type Product = {
   discount?: string;
   likes: number;
   purchases: number;
+  
 };
 
 const products: Product[] = [
@@ -30,6 +31,7 @@ const products: Product[] = [
     image: require('../assets/images/prod1.jpg'),
     likes: 12_400,
     purchases: 4600,
+    
   },
   {
     id: '2',

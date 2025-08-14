@@ -42,7 +42,7 @@ export default function AccountInfoScreen() {
     >
         {/* Header */}
         <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("mainpage")}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Ionicons name="arrow-back" size={24} color="black" />
             </TouchableOpacity>
             <Text style={styles.headerText}>Account Information</Text>
