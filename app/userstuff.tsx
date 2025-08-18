@@ -35,7 +35,8 @@ const PostScreen = () => {
     });
   };
 
-  const avatarUrl = "https://api.dicebear.com/7.x/avataaars/png?seed=Sophia";
+  const avatarUrl = "https://api.dicebear.com/7.x/avataaars/png?seed=Andres0
+  ";
 
 
   return (
@@ -54,7 +55,7 @@ const PostScreen = () => {
         <View style={styles.userInfo}>
           <Image source={{ uri: avatarUrl }} style={styles.avatar} />
           <View style={{ flex: 1 }}>
-            <Text style={styles.username}>Sophia Benson</Text>
+            <Text style={styles.username}>Andres</Text>
             <Text style={styles.postTime}>12 mins ago</Text>
           </View>
           <TouchableOpacity>
@@ -111,7 +112,7 @@ const PostScreen = () => {
           <Image source={{ uri: avatarUrl }} style={styles.avatar} />
 
           <View style={{ flex: 1 }}>
-            <Text style={styles.username}>Sophia Benson</Text>
+            <Text style={styles.username}>Andres</Text>
             <Text style={styles.postTime}>12 mins ago</Text>
           </View>
           <TouchableOpacity>

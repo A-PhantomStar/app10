@@ -38,7 +38,7 @@ export default function Index() {
           </View>
           <View style={styles.row}>
             <Ionicons name="person" size={20} color="#FF6B00" />
-            <Text style={styles.infoText}>Sophia Benson</Text>
+            <Text style={styles.infoText}>Andres</Text>
           </View>
           <View style={styles.row}>
             <Ionicons name="call" size={20} color="#FF6B00" />

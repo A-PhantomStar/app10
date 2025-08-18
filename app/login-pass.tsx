@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberedUser, setRememberedUser] = useState("Sophia"); // cambia a "" para la primera versión
+  const [rememberedUser, setRememberedUser] = useState("Andres"); // cambia a "" para la primera versión
   const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation();
 

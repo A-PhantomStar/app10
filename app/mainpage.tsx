@@ -100,7 +100,7 @@ export default function FeedScreen() {
         {/* Header con iconos de logout y carrito */}
         <View style={{ padding: 16, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
           <View>
-            <Text style={{ fontSize: 16 }}>Hi, <Text style={{ fontWeight: 'bold' }}>Sophia 🦄</Text></Text>
+            <Text style={{ fontSize: 16 }}>Hi, <Text style={{ fontWeight: 'bold' }}>Andres</Text></Text>
             <Text style={{ fontSize: 12, color: 'gray' }}>Anything to share with the community?</Text>
             <View style={{ flexDirection: 'row', marginTop: 8, gap: 8 }}>
               {['Photo', 'Video', 'Products'].map((label, idx) => (

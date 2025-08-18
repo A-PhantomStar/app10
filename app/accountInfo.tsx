@@ -6,8 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 
 
 export default function AccountInfoScreen() {
-    const [name, setName] = useState("Octavio García");
-    const [email, setEmail] = useState("poopythepoop@whenthepoop.poops");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [dob, setDob] = useState(new Date(2004, 6, 20));
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [interest, setInterest] = useState<"women" | "men">("women");
@@ -25,7 +25,7 @@ export default function AccountInfoScreen() {
 
     const handleSave = () => {
     if (changePassword && !isPasswordValid()) {
-        Alert.alert("Error", "Passwords must match and be at least 6 characters.");
+        Alert.alert("");
         return;
     }
 

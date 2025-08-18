@@ -8,7 +8,7 @@ import FooterNav from "../components/FooterNav";
 import { useNavigation } from "@react-navigation/native";
 
 export default function ProfileScreen() {
-    const avatarUrl = "https://api.dicebear.com/7.x/avataaars/png?seed=Sophia";
+    const avatarUrl = "https://api.dicebear.com/7.x/avataaars/png?seed=Andres";
     const navigation = useNavigation();
 
     return (
@@ -29,7 +29,7 @@ export default function ProfileScreen() {
                     {/* Avatar (DiceBear) */}
                     <Image source={{ uri: avatarUrl }} style={styles.avatar} />
 
-                    <Text style={styles.name}>Sophia</Text>
+                    <Text style={styles.name}>Andres</Text>
                     <Text style={styles.username}>@socien_sfy</Text>
 
                     {/* Stats */}

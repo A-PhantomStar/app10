@@ -76,7 +76,7 @@ const CreatePostScreen = () => {
 
       <View style={styles.userRow}>
         <Image
-          source={{ uri: `https://api.dicebear.com/7.x/avataaars/png?seed=Sophia` }}
+          source={{ uri: `https://api.dicebear.com/7.x/avataaars/png?seed=Andres
           style={styles.avatar}
         />
 

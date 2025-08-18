@@ -8,13 +8,13 @@ import FooterNav from '@/components/FooterNav';
 const initialPosts = [
   {
     id: 1,
-    name: 'Sophia 🌈',
+    name: 'Andres',
     isVerified: true,
     text: 'Just dropped a new collection! 💅✨',
     image: 'https://www.schatzistore.net/cdn/shop/files/38269_Lip_Oil_2_1200x_fc18a36c-cda5-4dbd-8ba5-78b931225410.webp?v=1717505773',
     likes: 0,
     comments: [],
-    avatarSeed: 'sophia',
+    avatarSeed: 'Andres',
     productTitle: 'Sparkle Lip Gloss',
     price: '$9.99',
     discount: '10%',
@@ -78,7 +78,7 @@ export default function FeedScreen() {
       <ScrollView>
         {/* Header */}
         <View style={{ padding: 16 }}>
-          <Text style={{ fontSize: 16 }}>Hi, <Text style={{ fontWeight: 'bold' }}>Sophia 🦄</Text></Text>
+          <Text style={{ fontSize: 16 }}>Hi, <Text style={{ fontWeight: 'bold' }}>Andres</Text></Text>
           <Text style={{ fontSize: 12, color: 'gray' }}>Anything to share with the community?</Text>
           <View style={{ flexDirection: 'row', marginTop: 8, gap: 8 }}>
             <TouchableOpacity
